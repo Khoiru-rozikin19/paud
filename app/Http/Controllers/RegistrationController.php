@@ -48,7 +48,7 @@ class RegistrationController extends Controller
             'nama_ibu.required'      => 'Nama ibu wajib diisi.',
             'hp_ortu.required'       => 'No. HP Orang Tua / Wali wajib diisi.',
             'alamat.required'        => 'Alamat wajib diisi.',
-            'foto_anak.required'     => 'Pas foto anak wajib diunggah.',
+            'foto_anak.required'     => 'Foto selfie anak wajib diunggah.',
             'foto_anak.max'          => 'Ukuran foto maksimal 5MB.',
             'akta_kelahiran.required'=> 'Scan akta kelahiran wajib diunggah.',
             'akta_kelahiran.max'     => 'Ukuran file maksimal 5MB.',

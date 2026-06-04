@@ -1808,8 +1808,8 @@
                         <li>
                             <div class="req-icon"><i data-lucide="camera"></i></div>
                             <div class="req-text">
-                                <h4>Pas Foto Anak (3×4)</h4>
-                                <p>Format JPG/PNG, ukuran maksimal 2MB, latar belakang merah atau biru.</p>
+                                <h4>Foto Selfie Anak</h4>
+                                <p>Foto selfie anak format JPG/PNG, ukuran maksimal 5MB</p>
                             </div>
                         </li>
                         <li>
@@ -2062,9 +2062,9 @@
                             <p class="form-step-desc">Unggah dokumen yang diperlukan. Format: JPG, PNG, atau PDF (maks. 5MB per file).</p>
 
                             <div class="upload-grid">
-                                {{-- Pas Foto --}}
+                                {{-- Foto Selfie --}}
                                 <div class="upload-item">
-                                    <label class="form-label">Pas Foto Anak (3×4) <span class="required">*</span></label>
+                                    <label class="form-label">Foto Selfie Anak <span class="required">*</span></label>
                                     <div class="file-upload-area" id="upload-foto_anak">
                                         <input type="file" name="foto_anak" id="foto_anak" accept=".jpg,.jpeg,.png"
                                                onchange="handleFileUpload(this, 'foto_anak')">
@@ -2084,7 +2084,7 @@
                                     </div>
                                     <div class="form-error" id="error-foto_anak">
                                         <i data-lucide="alert-circle"></i>
-                                        <span>Pas foto wajib diunggah.</span>
+                                        <span>Foto selfie wajib diunggah.</span>
                                     </div>
                                 </div>
 
@@ -2436,7 +2436,7 @@
             if (step === 3) {
                 const files = ['foto_anak', 'akta_kelahiran', 'kartu_keluarga', 'ktp_ortu'];
                 const messages = {
-                    'foto_anak': 'Pas foto wajib diunggah.',
+                    'foto_anak': 'Foto selfie wajib diunggah.',
                     'akta_kelahiran': 'Akta kelahiran wajib diunggah.',
                     'kartu_keluarga': 'Kartu keluarga wajib diunggah.',
                     'ktp_ortu': 'KTP orang tua wajib diunggah.',
@@ -2531,7 +2531,7 @@
             const filesContainer = document.getElementById('review-files');
             filesContainer.innerHTML = '';
             const fileFields = {
-                'foto_anak': 'Pas Foto',
+                'foto_anak': 'Foto Selfie',
                 'akta_kelahiran': 'Akta Kelahiran',
                 'kartu_keluarga': 'Kartu Keluarga',
                 'ktp_ortu': 'KTP Orang Tua'

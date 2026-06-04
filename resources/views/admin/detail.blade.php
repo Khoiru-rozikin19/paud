@@ -494,7 +494,7 @@
                     <div class="doc-grid">
                         @php
                             $docs = [
-                                ['field' => 'foto_anak', 'label' => 'Pas Foto Anak', 'type' => 'photo'],
+                                ['field' => 'foto_anak', 'label' => 'Foto Selfie Anak', 'type' => 'photo'],
                                 ['field' => 'akta_kelahiran', 'label' => 'Akta Kelahiran', 'type' => 'doc'],
                                 ['field' => 'kartu_keluarga', 'label' => 'Kartu Keluarga', 'type' => 'doc'],
                                 ['field' => 'ktp_ortu', 'label' => 'KTP Orang Tua', 'type' => 'doc'],
