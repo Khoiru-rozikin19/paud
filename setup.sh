@@ -253,8 +253,16 @@ fi
 
 cd "$APP_DIR"
 
+# Allow composer to run as root
+export COMPOSER_ALLOW_SUPERUSER=1
+
 # Install Composer dependencies (production)
+# Hapus lock file karena dibuat di Windows, bisa tidak kompatibel dengan Linux
 print_info "Menginstall Composer dependencies..."
+if [[ -f "composer.lock" ]]; then
+    print_info "Menghapus composer.lock (dibuat di OS lain)..."
+    rm -f composer.lock
+fi
 composer install --no-dev --optimize-autoloader --no-interaction
 
 # Setup environment
