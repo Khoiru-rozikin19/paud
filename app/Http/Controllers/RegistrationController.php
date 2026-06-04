@@ -29,9 +29,8 @@ class RegistrationController extends Controller
 
             // Data Orang Tua
             'nama_ayah' => 'required|string|max:255',
-            'hp_ayah'   => 'required|string|max:20',
             'nama_ibu'  => 'required|string|max:255',
-            'hp_ibu'    => 'required|string|max:20',
+            'hp_ortu'   => 'required|string|max:20',
 
             // Alamat
             'alamat' => 'required|string',
@@ -46,9 +45,8 @@ class RegistrationController extends Controller
             'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
             'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
             'nama_ayah.required'     => 'Nama ayah wajib diisi.',
-            'hp_ayah.required'       => 'No. HP ayah wajib diisi.',
             'nama_ibu.required'      => 'Nama ibu wajib diisi.',
-            'hp_ibu.required'        => 'No. HP ibu wajib diisi.',
+            'hp_ortu.required'       => 'No. HP Orang Tua / Wali wajib diisi.',
             'alamat.required'        => 'Alamat wajib diisi.',
             'foto_anak.required'     => 'Pas foto anak wajib diunggah.',
             'foto_anak.max'          => 'Ukuran foto maksimal 2MB.',
@@ -83,9 +81,8 @@ class RegistrationController extends Controller
             'tanggal_lahir'       => $validated['tanggal_lahir'],
             'jenis_kelamin'       => $validated['jenis_kelamin'],
             'nama_ayah'           => $validated['nama_ayah'],
-            'hp_ayah'             => $validated['hp_ayah'],
             'nama_ibu'            => $validated['nama_ibu'],
-            'hp_ibu'              => $validated['hp_ibu'],
+            'hp_ortu'             => $validated['hp_ortu'],
             'alamat'              => $validated['alamat'],
             'foto_anak'           => $fotoPaths['foto_anak'] ?? null,
             'akta_kelahiran'      => $fotoPaths['akta_kelahiran'] ?? null,

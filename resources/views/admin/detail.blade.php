@@ -459,16 +459,12 @@
                             <span class="field-value">{{ $registration->nama_ayah }}</span>
                         </div>
                         <div class="field">
-                            <span class="field-label">No. HP Ayah</span>
-                            <span class="field-value">{{ $registration->hp_ayah }}</span>
-                        </div>
-                        <div class="field">
                             <span class="field-label">Nama Ibu</span>
                             <span class="field-value">{{ $registration->nama_ibu }}</span>
                         </div>
-                        <div class="field">
-                            <span class="field-label">No. HP Ibu</span>
-                            <span class="field-value">{{ $registration->hp_ibu }}</span>
+                        <div class="field full">
+                            <span class="field-label">No. HP Orang Tua / Wali</span>
+                            <span class="field-value">{{ $registration->hp_ortu }}</span>
                         </div>
                     </div>
                 </div>

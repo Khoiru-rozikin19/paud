@@ -1995,10 +1995,9 @@
                             <h3 class="form-step-title">Data Orang Tua</h3>
                             <p class="form-step-desc">Masukkan data orang tua / wali calon siswa.</p>
 
-                            {{-- Ayah --}}
-                            <div style="margin-bottom: var(--space-7);">
-                                <h4 style="font-size: var(--text-base); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-5); display: flex; align-items: center; gap: var(--space-2);">
-                                    <i data-lucide="user" style="width:18px;height:18px;"></i> Data Ayah
+                            <div style="margin-bottom: var(--space-5);">
+                                <h4 style="font-size: var(--text-base); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
+                                    <i data-lucide="users" style="width:18px;height:18px;"></i> Data Ayah & Ibu
                                 </h4>
                                 <div class="form-row">
                                     <div class="form-group">
@@ -2012,25 +2011,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="hp_ayah">No. HP Ayah <span class="required">*</span></label>
-                                        <input type="tel" class="form-input" id="hp_ayah" name="hp_ayah"
-                                               placeholder="Contoh: 081234567890"
-                                               value="{{ old('hp_ayah') }}" required>
-                                        <div class="form-error" id="error-hp_ayah">
-                                            <i data-lucide="alert-circle"></i>
-                                            <span>No. HP ayah wajib diisi.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- Ibu --}}
-                            <div style="margin-bottom: var(--space-5);">
-                                <h4 style="font-size: var(--text-base); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-5); display: flex; align-items: center; gap: var(--space-2);">
-                                    <i data-lucide="user" style="width:18px;height:18px;"></i> Data Ibu
-                                </h4>
-                                <div class="form-row">
-                                    <div class="form-group">
                                         <label class="form-label" for="nama_ibu">Nama Lengkap Ibu <span class="required">*</span></label>
                                         <input type="text" class="form-input" id="nama_ibu" name="nama_ibu"
                                                placeholder="Masukkan nama lengkap ibu"
@@ -2040,15 +2020,15 @@
                                             <span>Nama ibu wajib diisi.</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="hp_ibu">No. HP Ibu <span class="required">*</span></label>
-                                        <input type="tel" class="form-input" id="hp_ibu" name="hp_ibu"
-                                               placeholder="Contoh: 081234567890"
-                                               value="{{ old('hp_ibu') }}" required>
-                                        <div class="form-error" id="error-hp_ibu">
-                                            <i data-lucide="alert-circle"></i>
-                                            <span>No. HP ibu wajib diisi.</span>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="hp_ortu">No. HP Orang Tua / Wali (WhatsApp) <span class="required">*</span></label>
+                                    <input type="tel" class="form-input" id="hp_ortu" name="hp_ortu"
+                                           placeholder="Contoh: 081234567890"
+                                           value="{{ old('hp_ortu') }}" required>
+                                    <div class="form-error" id="error-hp_ortu">
+                                        <i data-lucide="alert-circle"></i>
+                                        <span>No. HP Orang Tua / Wali wajib diisi.</span>
                                     </div>
                                 </div>
                             </div>
@@ -2232,16 +2212,12 @@
                                         <span class="value" id="review-nama_ayah">-</span>
                                     </div>
                                     <div class="review-item">
-                                        <span class="label">No. HP Ayah</span>
-                                        <span class="value" id="review-hp_ayah">-</span>
-                                    </div>
-                                    <div class="review-item">
                                         <span class="label">Nama Ibu</span>
                                         <span class="value" id="review-nama_ibu">-</span>
                                     </div>
-                                    <div class="review-item">
-                                        <span class="label">No. HP Ibu</span>
-                                        <span class="value" id="review-hp_ibu">-</span>
+                                    <div class="review-item" style="grid-column: 1 / -1;">
+                                        <span class="label">No. HP Orang Tua / Wali</span>
+                                        <span class="value" id="review-hp_ortu">-</span>
                                     </div>
                                     <div class="review-item" style="grid-column: 1 / -1;">
                                         <span class="label">Alamat</span>
@@ -2441,9 +2417,8 @@
             if (step === 2) {
                 const fields = [
                     { id: 'nama_ayah', msg: 'Nama ayah wajib diisi.' },
-                    { id: 'hp_ayah', msg: 'No. HP ayah wajib diisi.' },
                     { id: 'nama_ibu', msg: 'Nama ibu wajib diisi.' },
-                    { id: 'hp_ibu', msg: 'No. HP ibu wajib diisi.' },
+                    { id: 'hp_ortu', msg: 'No. HP Orang Tua / Wali wajib diisi.' },
                     { id: 'alamat', msg: 'Alamat wajib diisi.' },
                 ];
 
@@ -2545,12 +2520,10 @@
             // Data Orang Tua
             document.getElementById('review-nama_ayah').textContent =
                 document.getElementById('nama_ayah').value || '-';
-            document.getElementById('review-hp_ayah').textContent =
-                document.getElementById('hp_ayah').value || '-';
             document.getElementById('review-nama_ibu').textContent =
                 document.getElementById('nama_ibu').value || '-';
-            document.getElementById('review-hp_ibu').textContent =
-                document.getElementById('hp_ibu').value || '-';
+            document.getElementById('review-hp_ortu').textContent =
+                document.getElementById('hp_ortu').value || '-';
             document.getElementById('review-alamat').textContent =
                 document.getElementById('alamat').value || '-';
 

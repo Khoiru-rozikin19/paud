@@ -407,16 +407,12 @@
                     <span class="detail-value">{{ $registration->nama_ayah }}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">HP Ayah</span>
-                    <span class="detail-value">{{ $registration->hp_ayah }}</span>
-                </div>
-                <div class="detail-item">
                     <span class="detail-label">Nama Ibu</span>
                     <span class="detail-value">{{ $registration->nama_ibu }}</span>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">HP Ibu</span>
-                    <span class="detail-value">{{ $registration->hp_ibu }}</span>
+                <div class="detail-item full">
+                    <span class="detail-label">No. HP Orang Tua / Wali</span>
+                    <span class="detail-value">{{ $registration->hp_ortu }}</span>
                 </div>
                 <div class="detail-item full">
                     <span class="detail-label">Alamat</span>
