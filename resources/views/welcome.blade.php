@@ -2059,7 +2059,7 @@
                         {{-- ===== STEP 3: Dokumen ===== --}}
                         <div class="form-step" data-step="3">
                             <h3 class="form-step-title">Upload Dokumen</h3>
-                            <p class="form-step-desc">Unggah dokumen yang diperlukan. Format: JPG, PNG, atau PDF (maks. 2MB per file).</p>
+                            <p class="form-step-desc">Unggah dokumen yang diperlukan. Format: JPG, PNG, atau PDF (maks. 5MB per file).</p>
 
                             <div class="upload-grid">
                                 {{-- Pas Foto --}}
@@ -2070,7 +2070,7 @@
                                                onchange="handleFileUpload(this, 'foto_anak')">
                                         <div class="file-upload-icon"><i data-lucide="camera"></i></div>
                                         <div class="file-upload-text"><strong>Klik untuk upload</strong> atau drag & drop</div>
-                                        <div class="file-upload-hint">JPG, PNG — Maks. 2MB</div>
+                                        <div class="file-upload-hint">JPG, PNG — Maks. 5MB</div>
                                     </div>
                                     <div class="file-preview" id="preview-foto_anak">
                                         <div class="file-preview-icon"><i data-lucide="image"></i></div>
@@ -2096,7 +2096,7 @@
                                                onchange="handleFileUpload(this, 'akta_kelahiran')">
                                         <div class="file-upload-icon"><i data-lucide="file-text"></i></div>
                                         <div class="file-upload-text"><strong>Klik untuk upload</strong> atau drag & drop</div>
-                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 2MB</div>
+                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 5MB</div>
                                     </div>
                                     <div class="file-preview" id="preview-akta_kelahiran">
                                         <div class="file-preview-icon"><i data-lucide="file-check"></i></div>
@@ -2122,7 +2122,7 @@
                                                onchange="handleFileUpload(this, 'kartu_keluarga')">
                                         <div class="file-upload-icon"><i data-lucide="users"></i></div>
                                         <div class="file-upload-text"><strong>Klik untuk upload</strong> atau drag & drop</div>
-                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 2MB</div>
+                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 5MB</div>
                                     </div>
                                     <div class="file-preview" id="preview-kartu_keluarga">
                                         <div class="file-preview-icon"><i data-lucide="file-check"></i></div>
@@ -2148,7 +2148,7 @@
                                                onchange="handleFileUpload(this, 'ktp_ortu')">
                                         <div class="file-upload-icon"><i data-lucide="credit-card"></i></div>
                                         <div class="file-upload-text"><strong>Klik untuk upload</strong> atau drag & drop</div>
-                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 2MB</div>
+                                        <div class="file-upload-hint">JPG, PNG, PDF — Maks. 5MB</div>
                                     </div>
                                     <div class="file-preview" id="preview-ktp_ortu">
                                         <div class="file-preview-icon"><i data-lucide="file-check"></i></div>
@@ -2562,8 +2562,8 @@
 
             if (file) {
                 // Check file size
-                if (file.size > 2 * 1024 * 1024) {
-                    showToast('Ukuran file ' + file.name + ' melebihi 2MB. Silakan pilih file yang lebih kecil.', 'error');
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Ukuran file ' + file.name + ' melebihi 5MB. Silakan pilih file yang lebih kecil.', 'error');
                     input.value = '';
                     return;
                 }

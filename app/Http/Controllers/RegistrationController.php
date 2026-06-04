@@ -36,10 +36,10 @@ class RegistrationController extends Controller
             'alamat' => 'required|string',
 
             // Dokumen
-            'foto_anak'      => 'required|file|mimes:jpg,jpeg,png|max:2048',
-            'akta_kelahiran' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'kartu_keluarga' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'ktp_ortu'       => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'foto_anak'      => 'required|file|mimes:jpg,jpeg,png|max:5120',
+            'akta_kelahiran' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
+            'kartu_keluarga' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
+            'ktp_ortu'       => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
         ], [
             'nama_lengkap.required'  => 'Nama lengkap wajib diisi.',
             'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
@@ -49,13 +49,13 @@ class RegistrationController extends Controller
             'hp_ortu.required'       => 'No. HP Orang Tua / Wali wajib diisi.',
             'alamat.required'        => 'Alamat wajib diisi.',
             'foto_anak.required'     => 'Pas foto anak wajib diunggah.',
-            'foto_anak.max'          => 'Ukuran foto maksimal 2MB.',
+            'foto_anak.max'          => 'Ukuran foto maksimal 5MB.',
             'akta_kelahiran.required'=> 'Scan akta kelahiran wajib diunggah.',
-            'akta_kelahiran.max'     => 'Ukuran file maksimal 2MB.',
+            'akta_kelahiran.max'     => 'Ukuran file maksimal 5MB.',
             'kartu_keluarga.required'=> 'Scan kartu keluarga wajib diunggah.',
-            'kartu_keluarga.max'     => 'Ukuran file maksimal 2MB.',
+            'kartu_keluarga.max'     => 'Ukuran file maksimal 5MB.',
             'ktp_ortu.required'      => 'Scan KTP orang tua wajib diunggah.',
-            'ktp_ortu.max'           => 'Ukuran file maksimal 2MB.',
+            'ktp_ortu.max'           => 'Ukuran file maksimal 5MB.',
         ]);
 
         // Generate nomor pendaftaran
