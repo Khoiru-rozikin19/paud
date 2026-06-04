@@ -49,9 +49,8 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, var(--color-surface-dark) 0%, var(--color-primary) 40%, var(--color-primary-light) 70%, #3a5a20 100%);
-            padding: 2rem;
+            padding: 2rem 1rem;
             position: relative;
-            overflow: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -91,6 +90,7 @@
             width: 100%;
             overflow: hidden;
             animation: cardAppear 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 2rem 0; /* Auto vertical centering with padding limit */
         }
 
         @keyframes cardAppear {
@@ -321,20 +321,27 @@
             color: var(--color-text);
         }
 
-        /* Confetti effect */
+        /* Confetti effect (optimized with GPU-accelerated transform transitions) */
         .confetti-piece {
             position: fixed;
             width: 10px;
             height: 10px;
             top: -20px;
             opacity: 0;
-            animation: confettiFall 3s ease-in-out forwards;
+            animation: confettiFall 3s linear forwards;
             z-index: 10;
+            will-change: transform, opacity;
         }
 
         @keyframes confettiFall {
-            0% { opacity: 1; top: -10%; transform: rotate(0deg) translateX(0); }
-            100% { opacity: 0; top: 100%; transform: rotate(720deg) translateX(100px); }
+            0% { 
+                opacity: 1; 
+                transform: translateY(0) rotate(0deg) translateX(0); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(110vh) rotate(720deg) translateX(100px); 
+            }
         }
 
         @media (max-width: 640px) {
