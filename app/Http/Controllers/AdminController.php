@@ -25,11 +25,21 @@ class AdminController extends Controller
             'password' => 'required',
         ]);
 
-        // Admin credentials dari config/app.php (production-safe)
+        // 1. Cek Admin credentials dari config/app.php (production-safe / default fallback)
         $adminUser = config('app.admin_username');
         $adminPass = config('app.admin_password');
 
         if ($request->username === $adminUser && $request->password === $adminPass) {
+            session(['admin_logged_in' => true]);
+            return redirect()->route('admin.dashboard');
+        }
+
+        // 2. Cek database-based users (dari tabel users)
+        $user = \App\Models\User::where('email', $request->username)
+            ->orWhere('name', $request->username)
+            ->first();
+
+        if ($user && \Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
             session(['admin_logged_in' => true]);
             return redirect()->route('admin.dashboard');
         }
