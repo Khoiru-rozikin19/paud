@@ -328,7 +328,9 @@
     {{-- Top Nav --}}
     <nav class="top-nav">
         <a href="{{ route('admin.dashboard') }}" class="top-nav-brand">
-            <div class="top-nav-logo">A</div>
+            <div class="top-nav-logo">
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
             <span class="top-nav-text">TK/PAUD Azzahra</span>
         </a>
         <div class="top-nav-actions">

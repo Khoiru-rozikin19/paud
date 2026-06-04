@@ -491,7 +491,9 @@
     {{-- ===== SIDEBAR ===== --}}
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <div class="sidebar-logo">A</div>
+            <div class="sidebar-logo">
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
             <div class="sidebar-brand-text">
                 <h2>TK/PAUD Azzahra</h2>
                 <span>Panel Admin</span>

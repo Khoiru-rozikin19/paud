@@ -178,7 +178,9 @@
 <body>
     <div class="login-card">
         <div class="login-header">
-            <div class="login-logo">A</div>
+            <div class="login-logo">
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
             <h1>Panel Admin</h1>
             <p>TK/PAUD Azzahra — Penerimaan Siswa Baru</p>
         </div>

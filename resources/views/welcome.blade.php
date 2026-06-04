@@ -1675,7 +1675,9 @@
          ============================================ --}}
     <nav class="navbar" id="navbar">
         <a href="#" class="navbar-brand">
-            <div class="navbar-logo">A</div>
+            <div class="navbar-logo">
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo TK/PAUD Azzahra" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
             <div class="navbar-title">
                 <h1>TK/PAUD Azzahra</h1>
                 <span>Penerimaan Siswa Baru</span>
@@ -2292,7 +2294,9 @@
         <div class="footer-grid">
             <div>
                 <div class="footer-brand">
-                    <div class="footer-logo">A</div>
+                    <div class="footer-logo">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo TK/PAUD Azzahra" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
                     <div class="footer-brand-text">
                         <h3>TK/PAUD Azzahra</h3>
                         <span>Pendidikan Anak Usia Dini</span>
