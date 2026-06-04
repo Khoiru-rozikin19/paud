@@ -2553,6 +2553,33 @@
         // ============================================
         // FILE UPLOAD HANDLING
         // ============================================
+        const processingFiles = new Set();
+
+        function updateUploadButtonsState() {
+            const isProcessing = processingFiles.size > 0;
+            const submitBtn = document.getElementById('btnSubmit');
+            const agreementCheckbox = document.getElementById('agreement');
+            
+            // Step navigation buttons
+            document.querySelectorAll('.form-nav button').forEach(btn => {
+                if (btn.classList.contains('btn-next') || btn.classList.contains('btn-submit')) {
+                    if (isProcessing) {
+                        btn.disabled = true;
+                        btn.style.opacity = '0.6';
+                        btn.style.cursor = 'not-allowed';
+                    } else {
+                        if (btn.classList.contains('btn-submit')) {
+                            btn.disabled = !(agreementCheckbox && agreementCheckbox.checked);
+                        } else {
+                            btn.disabled = false;
+                        }
+                        btn.style.opacity = '';
+                        btn.style.cursor = '';
+                    }
+                }
+            });
+        }
+
         function handleFileUpload(input, fieldId) {
             const file = input.files[0];
             const uploadArea = document.getElementById('upload-' + fieldId);
@@ -2568,12 +2595,46 @@
                     return;
                 }
 
+                // Show preview and set processing state
                 uploadArea.classList.add('has-file');
                 uploadArea.classList.remove('error');
                 preview.classList.add('visible');
                 nameEl.textContent = file.name;
-                sizeEl.textContent = formatFileSize(file.size);
+                sizeEl.textContent = 'Memproses file...';
                 hideFieldError(fieldId);
+
+                // Add to processing queue
+                processingFiles.add(fieldId);
+                updateUploadButtonsState();
+
+                // Read file to memory to prevent ERR_UPLOAD_FILE_CHANGED on Android
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const arrayBuffer = e.target.result;
+                        const clonedFile = new File([arrayBuffer], file.name, { type: file.type });
+                        
+                        // Assign cloned memory-backed file back to the input element
+                        const dt = new DataTransfer();
+                        dt.items.add(clonedFile);
+                        input.files = dt.files;
+                        
+                        sizeEl.textContent = formatFileSize(clonedFile.size);
+                    } catch (err) {
+                        console.error('Error cloning file:', err);
+                        sizeEl.textContent = formatFileSize(file.size);
+                    } finally {
+                        processingFiles.delete(fieldId);
+                        updateUploadButtonsState();
+                    }
+                };
+                reader.onerror = function() {
+                    console.error('Error reading file');
+                    sizeEl.textContent = formatFileSize(file.size);
+                    processingFiles.delete(fieldId);
+                    updateUploadButtonsState();
+                };
+                reader.readAsArrayBuffer(file);
             }
         }
 
@@ -2585,6 +2646,9 @@
             input.value = '';
             uploadArea.classList.remove('has-file');
             preview.classList.remove('visible');
+            
+            processingFiles.delete(fieldId);
+            updateUploadButtonsState();
         }
 
         function formatFileSize(bytes) {
@@ -2602,7 +2666,11 @@
         const submitBtn = document.getElementById('btnSubmit');
 
         agreementCheckbox.addEventListener('change', function() {
-            submitBtn.disabled = !this.checked;
+            if (processingFiles.size > 0) {
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = !this.checked;
+            }
         });
 
         // ============================================
