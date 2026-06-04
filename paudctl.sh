@@ -134,22 +134,33 @@ show_status() {
 update_website() {
     print_info "Memulai pembaruan website dari repository GitHub..."
     
-    # 1. Git pull
+    # Konfigurasi safe directory agar Git tidak komplain tentang kepemilikan (ownership)
+    git config --global --add safe.directory "$SCRIPT_DIR" 2>/dev/null || true
+    
+    # 1. Git fetch & reset hard ke branch origin
     local branch
     branch=$(git branch --show-current 2>/dev/null || echo "main")
     print_info "Mengambil perubahan terbaru dari branch [${CYAN}$branch${NC}]..."
     
-    if git pull origin "$branch"; then
-        print_success "Git pull berhasil!"
+    print_info "Melakukan fetch dari origin..."
+    if git fetch --all; then
+        print_success "Git fetch berhasil!"
     else
-        print_error "Git pull gagal! Pastikan koneksi internet atau konfigurasi Git benar."
+        print_error "Git fetch gagal! Coba periksa koneksi internet atau konfigurasi Git."
+        return 1
+    fi
+    
+    print_info "Melakukan reset hard ke origin/$branch (menimpa perubahan lokal agar tidak konflik)..."
+    if git reset --hard origin/"$branch"; then
+        print_success "Reset repository ke versi terbaru berhasil!"
+    else
+        print_error "Git reset gagal!"
         return 1
     fi
     
     # 2. Composer dependencies
     print_info "Menginstall dependencies Composer (production)..."
     export COMPOSER_ALLOW_SUPERUSER=1
-    # Hapus lock file karena dibuat di Windows, bisa tidak kompatibel dengan Linux
     if [ -f "composer.lock" ]; then
         rm -f composer.lock
     fi
@@ -171,11 +182,16 @@ update_website() {
     fi
     
     # 4. Clear and rebuild cache
-    print_info "Membangun ulang cache Laravel..."
+    print_info "Membersihkan cache lama dan membangun ulang cache Laravel..."
+    php artisan cache:clear
+    php artisan config:clear
+    php artisan route:clear
+    php artisan view:clear
+    
     php artisan config:cache
     php artisan route:cache
     php artisan view:cache
-    print_success "Cache Laravel berhasil diperbarui!"
+    print_success "Cache Laravel berhasil dibersihkan dan diperbarui!"
     
     # 5. Fix permissions
     print_info "Mengatur kepemilikan dan hak akses file..."
