@@ -28,7 +28,6 @@ class AdminController extends Controller
         // 1. Cek Admin credentials dari config/app.php (production-safe / default fallback)
         $adminUser = config('app.admin_username');
         $adminPass = config('app.admin_password');
-
         if ($request->username === $adminUser && $request->password === $adminPass) {
             session(['admin_logged_in' => true]);
             return redirect()->route('admin.dashboard');

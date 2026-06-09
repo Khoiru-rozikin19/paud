@@ -4,12 +4,17 @@
 
 # Ensure script is run as root
 if [ "$EUID" -ne 0 ]; then
-    echo -e "\e[31m[ERROR] Script ini harus dijalankan sebagai root! Gunakan: sudo ./paudctl.sh\e[0m"
+    cmd="sudo ./paudctl.sh"
+    if [[ "$0" == *"/bin/paudctl"* ]]; then
+        cmd="sudo paudctl"
+    fi
+    echo -e "\e[31m[ERROR] Script ini harus dijalankan sebagai root! Gunakan: $cmd\e[0m"
     exit 1
 fi
 
-# Change directory to the script folder
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Resolve the real directory of the script (handling symlinks)
+REAL_SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || realpath "${BASH_SOURCE[0]}" 2>/dev/null || echo "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$( cd "$( dirname "$REAL_SCRIPT_PATH" )" && pwd )"
 cd "$SCRIPT_DIR" || exit 1
 
 # Formatting colors
@@ -157,6 +162,30 @@ update_website() {
         print_error "Git reset gagal!"
         return 1
     fi
+
+    # 1.1 Sinkronisasi Kredensial Baru ke .env
+    print_info "Memeriksa konfigurasi kredensial admin baru di .env..."
+    if [ -f ".env" ]; then
+        if ! grep -q "^ADMIN_USERNAME=" .env; then
+            echo "" >> .env
+            echo "ADMIN_USERNAME=admin@paudazzahra.com" >> .env
+            print_success "Menambahkan ADMIN_USERNAME ke .env"
+        else
+            sed -i 's/^ADMIN_USERNAME=.*/ADMIN_USERNAME=admin@paudazzahra.com/' .env
+            print_success "ADMIN_USERNAME diperbarui di .env"
+        fi
+
+        if ! grep -q "^ADMIN_PASSWORD=" .env; then
+            echo "ADMIN_PASSWORD=password" >> .env
+            print_success "Menambahkan ADMIN_PASSWORD ke .env"
+        else
+            sed -i 's/^ADMIN_PASSWORD=.*/ADMIN_PASSWORD=password/' .env
+            print_success "ADMIN_PASSWORD diperbarui di .env"
+        fi
+    else
+        print_error "File .env tidak ditemukan!"
+        return 1
+    fi
     
     # 2. Composer dependencies
     print_info "Menginstall dependencies Composer (production)..."
@@ -178,6 +207,15 @@ update_website() {
         print_success "Migrasi database selesai!"
     else
         print_error "Migrasi database gagal!"
+        return 1
+    fi
+
+    # 3.1 Jalankan Seeding untuk Menerapkan User Baru ke Database
+    print_info "Menerapkan user default baru (admin@paudazzahra.com) ke database..."
+    if php artisan db:seed --force; then
+        print_success "Database seeder berhasil dijalankan!"
+    else
+        print_error "Gagal menjalankan database seeder!"
         return 1
     fi
     
