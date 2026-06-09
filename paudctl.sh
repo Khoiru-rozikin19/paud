@@ -15,6 +15,13 @@ fi
 # Resolve the real directory of the script (handling symlinks)
 REAL_SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || realpath "${BASH_SOURCE[0]}" 2>/dev/null || echo "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$( cd "$( dirname "$REAL_SCRIPT_PATH" )" && pwd )"
+
+# Jika file .env tidak ditemukan di direktori script, tapi ada di /var/www/psb-azzahra,
+# maka otomatis alihkan direktori kerja ke folder aplikasi aktif (/var/www/psb-azzahra)
+if [ ! -f "$SCRIPT_DIR/.env" ] && [ -f "/var/www/psb-azzahra/.env" ]; then
+    SCRIPT_DIR="/var/www/psb-azzahra"
+fi
+
 cd "$SCRIPT_DIR" || exit 1
 
 # Formatting colors
