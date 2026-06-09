@@ -132,7 +132,7 @@ return [
     |
     */
 
-    'admin_username' => env('ADMIN_USERNAME', 'admin'),
-    'admin_password' => env('ADMIN_PASSWORD', 'azzahra2026'),
+    'admin_username' => env('ADMIN_USERNAME', 'admin@paudazzahra.com'),
+    'admin_password' => env('ADMIN_PASSWORD', 'password'),
 
 ];
