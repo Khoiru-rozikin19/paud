@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin PAUD',
-            'email' => 'admin@paudazzahra.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('password'),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@paudazzahra.com'],
+            [
+                'name' => 'Admin PAUD',
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
+            ]
+        );
     }
 }
